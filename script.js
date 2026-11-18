@@ -148,16 +148,33 @@ document.getElementById('resetBubbles').addEventListener('click', () => {
   buildBubbles();
 });
 
-// --- 4. Vent Box ---
+// --- // --- 4. Vent Box (Terkirim ke Email Kamu + Efek Terbang) ---
 const ventInput = document.getElementById('ventInput');
 const releaseTextBtn = document.getElementById('releaseTextBtn');
 const ventFeedback = document.getElementById('ventFeedback');
 
 releaseTextBtn.addEventListener('click', () => {
-  if (!ventInput.value.trim()) {
+  const pesan = ventInput.value.trim();
+  if (!pesan) {
     ventInput.focus();
     return;
   }
+
+  // Kirim teks ke email kamu secara background
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({
+      access_key: '86593aef-50de-47b1-8c4c-b3d540b93765',
+      subject: '💌 Curhatan dari Ayang',
+      message: pesan
+    })
+  }).catch(() => {});
+
+  // Animasi terbang tetap jalan seperti biasa
   const rect = ventInput.getBoundingClientRect();
   spawnParticles(rect.left + rect.width / 2, rect.top + rect.height / 2, ['🚀', '🌸', '🍃', '✨'], 20);
 

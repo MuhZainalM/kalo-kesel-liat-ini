@@ -1,0 +1,120 @@
+:root {
+  --bg-cream: #fff9f5;
+  --bg-peach: #ffeae0;
+  --bg-blush: #ffd6e0;
+  --card-bg: rgba(255, 255, 255, 0.86);
+  --text-main: #4a3531;
+  --text-muted: #826761;
+  --accent: #e06d78;
+  --accent-hover: #cc5662;
+  --accent-soft: #fce3e6;
+  --gold: #d99b52;
+  --shadow-soft: 0 12px 32px rgba(180, 115, 110, 0.12);
+  --radius-lg: 24px;
+  --radius-md: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text-main);
+  background: linear-gradient(160deg, var(--bg-cream) 0%, var(--bg-peach) 50%, var(--bg-blush) 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.65;
+  position: relative;
+}
+
+/* Ambient floating blobs */
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.45;
+  animation: floatBlob 14s ease-in-out infinite alternate;
+}
+
+.blob-1 {
+  width: 300px;
+  height: 300px;
+  background: #ffc2d1;
+  top: -60px;
+  left: -80px;
+}
+
+.blob-2 {
+  width: 340px;
+  height: 340px;
+  background: #ffd8be;
+  bottom: 10%;
+  right: -100px;
+  animation-delay: -5s;
+}
+
+@keyframes floatBlob {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, 40px) scale(1.1); }
+}
+
+/* Music Toggle Button */
+.music-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(224, 109, 120, 0.25);
+  color: var(--text-main);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.music-btn:hover {
+  transform: translateY(-2px);
+}
+
+.music-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.music-bars span {
+  width: 3px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: height 0.2s ease;
+}
+
+.music-btn.playing .music-bars span:nth-child(1) { animation: eq 0.7s ease-in-out infinite alternate; }
+.music-btn.playing .music-bars span:nth-child(2) { animation: eq 0.5s ease-in-out infinite alternate; }

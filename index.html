@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruang Aman Untuk Kamu 🤍</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <!-- Tombol Musik -->
+  <button class="music-btn" id="musicBtn" aria-label="Putar atau matikan musik">
+    <div class="music-bars">
+      <span></span><span></span><span></span>
+    </div>
+    <span id="musicLabel">Musik: Mati</span>
+  </button>
+
+  <main class="container">
+    <!-- Hero / Pembuka -->
+    <header class="hero">
+      <span class="hero-badge">Khusus Buat Kamu 🤍</span>
+      <h1>Tarik napas pelan-pelan dulu ya, Sayang...</h1>
+      <p>
+        Aku tahu hari ini berat dan bikin kamu kesel, sedih, atau marah. Kamu nggak harus langsung baik-baik saja sekarang. Aku bikin sudut kecil ini supaya kamu punya tempat buat bernapas.
+      </p>
+      <button class="btn-primary" id="startBtn">Buka Pelukan Virtual ✨</button>
+    </header>
+
+    <!-- 1. Pelampiasan Emosi -->
+    <section class="card" id="releaseSection">
+      <h2 class="section-title">🫧 Kotak Pelampiasan Kesal</h2>
+      <p class="section-desc">
+        Pencet gelembung-gelembung ini sepuasnya buat meluapkan rasa sebel di kepala kamu.
+      </p>
+
+      <div class="bubble-grid" id="bubbleGrid"></div>
+
+      <div class="bubble-footer">
+        <span id="popCounter">0 gelembung meletus</span>
+        <button class="btn-ghost" id="resetBubbles">Isi Ulang Gelembung</button>
+      </div>
+
+      <div class="vent-box">
+        <p class="section-desc" style="margin-bottom: 10px;">
+          Atau tulis semua hal yang bikin kamu marah & sedih di bawah ini. Nggak ada yang baca—setelah itu kita terbangkan biar hilang.
+        </p>
+        <textarea class="vent-textarea" id="ventInput" placeholder="Tulis apa aja di sini... Aku kesel banget karena..."></textarea>
+        <div class="vent-actions">
+          <span class="vent-feedback" id="ventFeedback">Bebanmu sudah diterbangkan 🌸</span>
+          <button class="btn-primary" id="releaseTextBtn" style="padding: 10px 20px; font-size: 0.9rem;">Terbangkan Keluhan 🍃</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Kartu Buka Saat Kamu... -->
+    <section class="card">
+      <h2 class="section-title">💌 Buka Saat Kamu...</h2>
+      <p class="section-desc">
+        Pilih satu kartu yang paling pas sama perasaan kamu detik ini.
+      </p>
+
+      <div class="envelope-grid">
+        <button class="envelope-btn" data-letter="marah">
+          <span class="envelope-tag">Kartu 01</span>
+          <span class="envelope-title">Lagi marah & pengen meledak</span>
+        </button>
+        <button class="envelope-btn" data-letter="sedih">
+          <span class="envelope-tag">Kartu 02</span>
+          <span class="envelope-title">Lagi sedih & capek banget</span>
+        </button>
+        <button class="envelope-btn" data-letter="keselAku">
+          <span class="envelope-tag">Kartu 03</span>
+          <span class="envelope-title">Lagi kesel sama aku</span>
+        </button>
+        <button class="envelope-btn" data-letter="butuhDitemani">
+          <span class="envelope-tag">Kartu 04</span>
+          <span class="envelope-title">Cuma butuh ditemani diam-diam</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 3. Kupon Kasih Sayang -->
+    <section class="card">
+      <h2 class="section-title">🎟️ Kupon Pelipur Lara</h2>
+      <p class="section-desc">
+        Ketuk kupon mana aja yang kamu mau sekarang. Nanti tinggal kirim ke aku, langsung aku turutin!
+      </p>
+
+      <div class="coupon-list" id="couponList">
+        <div class="coupon" data-title="Jajan Makanan / Minuman Favorit">
+          <div class="coupon-info">
+            <h4>🧋 Jajan Favorit Tanpa Alasan</h4>
+            <p>Boba, kopi, seblak, atau es krim—kamu tinggal sebut.</p>
+          </div>
+          <span class="coupon-badge">Klaim</span>
+        </div>
+
+        <div class="coupon" data-title="Didengerin Full Tanpa Dipotong">
+          <div class="coupon-info">
+            <h4>🎧 Sesi Curhat Bebas</h4>
+            <p>Aku dengerin semua cerita kamu tanpa menghakimi atau motong.</p>
+          </div>
+          <span class="coupon-badge">Klaim</span>
+        </div>
+
+        <div class="coupon" data-title="Peluk Lama & Dielus Kepalanya">
+          <div class="coupon-info">
+            <h4>🫂 Peluk Lama Pas Ketemu</h4>
+            <p>Berlaku sampai rasa capek dan kesel kamu berkurang.</p>
+          </div>
+          <span class="coupon-badge">Klaim</span>
+        </div>
+
+        <div class="coupon" data-title="Waktu Me-Time Bebas Gangguan">
+          <div class="coupon-info">
+            <h4>🌙 Waktu Istirahat Tenang</h4>
+            <p>Kalau kamu butuh sendiri dulu, aku kasih ruang & tetap jagain dari jauh.</p>
+          </div>
+          <span class="coupon-badge">Klaim</span>
+        </div>
+      </div>
+
+      <div class="copy-bar">
+        <button class="btn-ghost" id="copyCouponsBtn">📋 Salin Kupon yang Diklaim untuk Chat Aku</button>
+        <span class="copy-status" id="copyStatus"></span>
+      </div>
+    </section>
+
+    <!-- 4. Pelukan Virtual -->
+    <section class="card hug-section">
+      <h2 class="section-title" style="justify-content: center;">🤍 Aku Selalu di Pihak Kamu</h2>
+      <p class="section-desc">
+        Apa pun masalahnya, kamu nggak sendirian menghadapinya. Kalau udah agak legaan, pencet tombol di bawah ya.
+      </p>
+      <button class="hug-btn" id="hugBtn">Kirim Peluk Balik 🫂</button>
+      <div class="hug-message" id="hugMessage"></div>
+    </section>
+  </main>
+
+  <!-- Modal Surat -->
+  <div class="modal-overlay" id="letterModal">
+    <div class="modal-letter">
+      <h3 id="modalTitle

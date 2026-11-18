@@ -1,15 +1,14 @@
-// --- 1. Gentle Music Box Synthesizer (Web Audio API) ---
+// --- 1. Musik Kotak Musik Lembut (Web Audio API) ---
 let audioCtx = null;
 let isPlaying = false;
 let melodyTimer = null;
 let noteIndex = 0;
 
-// Melodi lembut pentatonik / lullaby
 const lullabyNotes = [
-  523.25, 659.25, 783.99, 659.25, // C5 E5 G5 E5
-  587.33, 698.46, 880.00, 698.46, // D5 F5 A5 F5
-  493.88, 587.33, 783.99, 587.33, // B4 D5 G5 D5
-  523.25, 659.25, 783.99, 1046.50 // C5 E5 G5 C6
+  523.25, 659.25, 783.99, 659.25,
+  587.33, 698.46, 880.00, 698.46,
+  493.88, 587.33, 783.99, 587.33,
+  523.25, 659.25, 783.99, 1046.50
 ];
 
 function initAudio() {
@@ -31,14 +30,14 @@ function playBellNote(freq) {
   osc.frequency.setValueAtTime(freq, now);
 
   gain.gain.setValueAtTime(0.001, now);
-  gain.gain.exponentialRampToValueAtTime(0.06, now + 0.04);
-  gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.4);
+  gain.gain.exponentialRampToValueAtTime(0.065, now + 0.04);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.45);
 
   osc.connect(gain);
   gain.connect(audioCtx.destination);
 
   osc.start(now);
-  osc.stop(now + 1.45);
+  osc.stop(now + 1.5);
 }
 
 function playPopSound() {
@@ -48,8 +47,8 @@ function playPopSound() {
   const gain = audioCtx.createGain();
 
   osc.type = 'triangle';
-  osc.frequency.setValueAtTime(320, now);
-  osc.frequency.exponentialRampToValueAtTime(620, now + 0.08);
+  osc.frequency.setValueAtTime(340, now);
+  osc.frequency.exponentialRampToValueAtTime(660, now + 0.08);
 
   gain.gain.setValueAtTime(0.12, now);
   gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
@@ -77,7 +76,7 @@ function toggleMusic(forcePlay = null) {
       melodyTimer = setInterval(() => {
         playBellNote(lullabyNotes[noteIndex % lullabyNotes.length]);
         noteIndex++;
-      }, 680);
+      }, 650);
     }
   } else {
     btn.classList.remove('playing');
@@ -91,11 +90,36 @@ document.getElementById('musicBtn').addEventListener('click', () => toggleMusic(
 
 document.getElementById('startBtn').addEventListener('click', () => {
   toggleMusic(true);
-  spawnParticles(window.innerWidth / 2, window.innerHeight / 2, ['🤍', '🌸', '✨'], 12);
-  document.getElementById('releaseSection').scrollIntoView({ behavior: 'smooth' });
+  spawnParticles(window.innerWidth / 2, window.innerHeight / 2, ['🤍', '🌸', '✨', '💖'], 15);
+  document.getElementById('moodSection').scrollIntoView({ behavior: 'smooth' });
 });
 
-// --- 2. Bubble Wrap ---
+// --- 2. Termometer Kesel Ayang ---
+const moodSlider = document.getElementById('moodSlider');
+const moodEmoji = document.getElementById('moodEmoji');
+const moodStatus = document.getElementById('moodStatus');
+
+moodSlider.addEventListener('input', () => {
+  const val = Number(moodSlider.value);
+  moodEmoji.style.transform = 'scale(1.18)';
+  setTimeout(() => (moodEmoji.style.transform = 'scale(1)'), 150);
+
+  if (val >= 85) {
+    moodEmoji.textContent = '🌋';
+    moodStatus.textContent = `Level ${val}%: Mode Naga Menyembur Api! (Harap jajanin segera)`;
+  } else if (val >= 60) {
+    moodEmoji.textContent = '😤';
+    moodStatus.textContent = `Level ${val}%: Kesel banget pengen nyakar tembok`;
+  } else if (val >= 35) {
+    moodEmoji.textContent = '🥺';
+    moodStatus.textContent = `Level ${val}%: Udah mulai reda dikit, tinggal butuh dipeluk`;
+  } else {
+    moodEmoji.textContent = '🥰';
+    moodStatus.textContent = `Level ${val}%: Yeay! Udah mulai senyum manis lagi 🤍`;
+  }
+});
+
+// --- 3. Bubble Wrap ---
 const bubbleGrid = document.getElementById('bubbleGrid');
 const popCounter = document.getElementById('popCounter');
 let poppedCount = 0;
@@ -110,7 +134,7 @@ function buildBubbles() {
       if (!this.classList.contains('popped')) {
         this.classList.add('popped');
         poppedCount++;
-        popCounter.textContent = `${poppedCount} gelembung meletus`;
+        popCounter.textContent = `${poppedCount} rasa sebel meletus`;
         playPopSound();
       }
     });
@@ -124,7 +148,7 @@ document.getElementById('resetBubbles').addEventListener('click', () => {
   buildBubbles();
 });
 
-// --- 3. Vent Box (Terbangkan Keluhan) ---
+// --- 4. Vent Box ---
 const ventInput = document.getElementById('ventInput');
 const releaseTextBtn = document.getElementById('releaseTextBtn');
 const ventFeedback = document.getElementById('ventFeedback');
@@ -135,7 +159,7 @@ releaseTextBtn.addEventListener('click', () => {
     return;
   }
   const rect = ventInput.getBoundingClientRect();
-  spawnParticles(rect.left + rect.width / 2, rect.top + rect.height / 2, ['🌸', '🍃', '✨', '🦋'], 18);
+  spawnParticles(rect.left + rect.width / 2, rect.top + rect.height / 2, ['🚀', '🌸', '🍃', '✨'], 20);
 
   ventInput.classList.add('vanishing');
   setTimeout(() => {
@@ -146,23 +170,23 @@ releaseTextBtn.addEventListener('click', () => {
   }, 500);
 });
 
-// --- 4. Open When Letters ---
+// --- 5. Surat Rahasia ---
 const letters = {
   marah: {
-    title: 'Saat Kamu Lagi Marah & Pengen Meledak',
-    body: 'Valid banget kalau kamu marah sekarang. Kamu nggak harus pura-pura sabar atau langsung senyum.\n\nLuapin aja dulu—mau diem dulu boleh, mau cerita sambil ngomel-ngomel juga aku siap dengerin. Yang penting jangan dipendem sendirian sampai bikin dada kamu sesek ya.'
+    title: 'Saat Kamu Lagi Marah & Pengen Meledak 🔥',
+    body: 'Wajar banget kalau kamu marah sekarang. Kamu nggak harus pura-pura sabar atau langsung senyum.\n\nLuapin aja dulu—mau diem dulu boleh, mau ngomel panjang lebar juga aku siap dengerin. Yang penting jangan dipendem sendirian sampai bikin dada kamu sesek ya, Cantik.'
   },
   sedih: {
-    title: 'Saat Kamu Lagi Sedih & Capek Banget',
-    body: 'Kalau hari ini rasanya berat banget dan air mata kamu pengen jatuh, nangis aja nggak apa-apa. Nangis bukan berarti kamu lemah, itu tandanya kamu udah bertahan terlalu kuat.\n\nIstirahat sebentar ya. Dunia boleh berisik, tapi di sini kamu selalu aman.'
+    title: 'Saat Kamu Lagi Sedih & Capek Banget 🌧️',
+    body: 'Kalau hari ini rasanya berat banget dan air mata kamu pengen jatuh, nangis aja nggak apa-apa. Nangis bukan berarti kamu lemah, itu tandanya kamu udah bertahan terlalu kuat.\n\nSini istirahat sebentar. Dunia boleh berisik, tapi di sini kamu selalu aman dan disayang.'
   },
   keselAku: {
-    title: 'Saat Kamu Lagi Kesel Sama Aku',
-    body: 'Maaf ya kalau sikap atau omongan aku bikin hati kamu nggak enak hari ini. Aku nggak pernah berniat nyakitin kamu.\n\nKalau kamu udah siap ngobrol, kasih tahu aku bagian mana yang bikin kamu kesel. Aku mau belajar jadi lebih baik buat kamu, bukan menang debat.'
+    title: 'Saat Kamu Lagi Kesel Sama Aku 🥺',
+    body: 'Maaf ya kalau sikap atau omongan aku bikin hati kamu nggak enak hari ini. Nggak ada sedikit pun niat aku buat nyakitin orang yang paling aku sayang.\n\nKalau kamu udah siap ngobrol, kasih tahu aku ya. Aku mau belajar jadi lebih baik buat kamu, bukan menang debat.'
   },
-  butuhDitemani: {
-    title: 'Saat Kamu Cuma Butuh Ditemani',
-    body: 'Nggak perlu jelasin apa-apa kalau kamu lagi nggak punya energi buat cerita.\n\nAnggap halaman ini tangan aku yang lagi menggenggam tangan kamu. Aku di sini, nggak ke mana-mana, nungguin kamu sampai hati kamu pelan-pelan hangat lagi.'
+  kangen: {
+    title: 'Saat Kamu Cuma Butuh Dipeluk 🤍',
+    body: 'Nggak perlu jelasin apa-apa kalau kamu lagi kehabisan energi buat cerita.\n\nAnggap halaman ini tangan aku yang lagi menggenggam tangan kamu erat-erat. Aku di sini, nggak ke mana-mana, nungguin kamu sampai hati kamu hangat lagi.'
   }
 };
 
@@ -187,13 +211,12 @@ letterModal.addEventListener('click', (e) => {
   if (e.target === letterModal) letterModal.classList.remove('open');
 });
 
-// --- 5. Coupons ---
-const coupons = document.querySelectorAll('.coupon');
-coupons.forEach(coupon => {
+// --- 6. Voucher Suap ---
+document.querySelectorAll('.coupon').forEach(coupon => {
   coupon.addEventListener('click', () => {
     coupon.classList.toggle('claimed');
     const badge = coupon.querySelector('.coupon-badge');
-    badge.textContent = coupon.classList.contains('claimed') ? 'DIKLAIM ✓' : 'Klaim';
+    badge.textContent = coupon.classList.contains('claimed') ? 'DIAMBIL ✓' : 'Ambil';
   });
 });
 
@@ -203,43 +226,67 @@ document.getElementById('copyCouponsBtn').addEventListener('click', () => {
 
   const status = document.getElementById('copyStatus');
   if (claimed.length === 0) {
-    status.style.color = '#e06d78';
-    status.textContent = 'Pilih minimal satu kupon dulu di atas ya 🤍';
+    status.style.color = '#e6496f';
+    status.textContent = 'Pilih minimal satu voucher dulu di atas ya 🤍';
     return;
   }
 
-  const textToCopy = `Sayang, aku klaim kupon ini ya:\n${claimed.join('\n')}`;
+  const textToCopy = `Sayang, aku klaim voucher anti-ngambek ini ya:\n${claimed.join('\n')}`;
   navigator.clipboard.writeText(textToCopy).then(() => {
-    status.style.color = '#3a8a5c';
+    status.style.color = '#2f855a';
     status.textContent = 'Tersalin! Tinggal tempel (paste) di chat aku ya 💌';
   }).catch(() => {
-    status.textContent = 'Kupon siap! Screenshot aja bagian ini kirim ke aku 💌';
+    status.textContent = 'Screenshot aja voucher pilihanmu lalu kirim ke aku 💌';
   });
 });
 
-// --- 6. Virtual Hug Finale ---
+// --- 7. Tombol Lucu "Masih Marah" yang Lari + Tombol Peluk ---
+const runawayBtn = document.getElementById('runawayBtn');
+const runawayTexts = [
+  'Eits, nggak kena 😜',
+  'Jangan marah terus dong 🥺',
+  'Tombol ini lagi rusak 🏃‍♂️💨',
+  'Pencet yang pink aja ya 🤍',
+  'Aku beliin jajan deh, janji! 🧋'
+];
+let dodgeCount = 0;
+
+function dodgeButton() {
+  const moveX = (Math.random() - 0.5) * 180;
+  const moveY = (Math.random() - 0.5) * 90;
+  runawayBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+  runawayBtn.textContent = runawayTexts[dodgeCount % runawayTexts.length];
+  dodgeCount++;
+}
+
+runawayBtn.addEventListener('mouseenter', dodgeButton);
+runawayBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  dodgeButton();
+});
+
 let hugCount = 0;
 const hugMessages = [
-  'Peluk erat dari jauh... tarik napas, buang pelan-pelan 🤍',
-  'Satu pelukan lagi buat ngusir semua rasa kesel hari ini 🫂',
-  'Kamu berharga banget buat aku. Makasih udah bertahan hari ini ✨',
-  'Kapan pun kamu butuh, pelukan ini selalu gratis & unlimited 🌷'
+  'Yeay! Peluk virtual terkirim... makasih udah mau baikan, Sayang 🤍🫂',
+  'Satu pelukan hangat lagi biar senyum manis kamu balik 100% ✨💖',
+  'Kamu itu rumah paling nyaman buat aku. Love you so much! 🌷'
 ];
 
-document.getElementById('hugBtn').addEventListener('click', (e) => {
+document.getElementById('forgiveBtn').addEventListener('click', (e) => {
   const rect = e.target.getBoundingClientRect();
-  spawnParticles(rect.left + rect.width / 2, rect.top, ['🤍', '🫂', '💖', '🌷', '✨'], 22);
+  spawnParticles(rect.left + rect.width / 2, rect.top, ['🤍', '🫂', '💖', '🌷', '✨', '🥰'], 26);
   document.getElementById('hugMessage').textContent = hugMessages[hugCount % hugMessages.length];
+  runawayBtn.style.display = 'none';
   hugCount++;
 });
 
-// --- Helper: Floating Particles ---
+// --- Helper: Partikel Terbang ---
 function spawnParticles(x, y, symbols, count) {
   for (let i = 0; i < count; i++) {
     const el = document.createElement('span');
     el.className = 'particle';
     el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-    const offsetX = (Math.random() - 0.5) * 180;
+    const offsetX = (Math.random() - 0.5) * 200;
     const offsetY = (Math.random() - 0.5) * 60;
     el.style.left = `${x + offsetX}px`;
     el.style.top = `${y + offsetY}px`;

@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ruang Aman Untuk Kamu 🤍</title>
+  <title>Posko Darurat Bujuk Ayang 🤍✨</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Latar Belakang Aurora & Bintang -->
   <div class="ambient-bg">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
   </div>
 
   <!-- Tombol Musik -->
@@ -24,123 +26,142 @@
   </button>
 
   <main class="container">
-    <!-- Hero / Pembuka -->
+    <!-- Hero Section -->
     <header class="hero">
-      <span class="hero-badge">Khusus Buat Kamu 🤍</span>
-      <h1>Tarik napas pelan-pelan dulu ya, Sayang...</h1>
+      <span class="hero-badge">🚨 SIAGA 1: AYANG LAGI BADMOOD 🚨</span>
+      <h1>Tarik napas dulu ya, Cantik...</h1>
       <p>
-        Aku tahu hari ini berat dan bikin kamu kesel, sedih, atau marah. Kamu nggak harus langsung baik-baik saja sekarang. Aku bikin sudut kecil ini supaya kamu punya tempat buat bernapas.
+        Aku tahu hari ini nyebelin dan bikin kamu kesel, sedih, atau pengen gigit orang. Sebelum marahnya lanjut, mampir sebentar ke posko darurat yang aku bikin khusus buat kamu ini ya.
       </p>
-      <button class="btn-primary" id="startBtn">Buka Pelukan Virtual ✨</button>
+      <button class="btn-primary" id="startBtn">Masuk Ruang Bujuk ✨</button>
     </header>
 
-    <!-- 1. Pelampiasan Emosi -->
-    <section class="card" id="releaseSection">
-      <h2 class="section-title">🫧 Kotak Pelampiasan Kesal</h2>
+    <!-- 1. Cek Level Kesel (Lucu & Interaktif) -->
+    <section class="card" id="moodSection">
+      <h2 class="section-title">🌡️ Termometer Kesel Ayang</h2>
       <p class="section-desc">
-        Pencet gelembung-gelembung ini sepuasnya buat meluapkan rasa sebel di kepala kamu.
+        Geser buat ngukur seberapa pengen kamu marah hari ini:
+      </p>
+
+      <div class="mood-box">
+        <div class="mood-emoji" id="moodEmoji">😤</div>
+        <div class="mood-status" id="moodStatus">Level 70%: Kesel banget pengen nyakar tembok</div>
+        <input type="range" min="1" max="100" value="70" class="mood-slider" id="moodSlider" />
+      </div>
+    </section>
+
+    <!-- 2. Kotak Pelampiasan -->
+    <section class="card">
+      <h2 class="section-title">🫧 Pencet Biar Lega</h2>
+      <p class="section-desc">
+        Anggap aja gelembung ini semua hal yang bikin kamu sebel hari ini. Letusin semuanya!
       </p>
 
       <div class="bubble-grid" id="bubbleGrid"></div>
 
       <div class="bubble-footer">
-        <span id="popCounter">0 gelembung meletus</span>
+        <span id="popCounter">0 rasa sebel meletus</span>
         <button class="btn-ghost" id="resetBubbles">Isi Ulang Gelembung</button>
       </div>
 
       <div class="vent-box">
         <p class="section-desc" style="margin-bottom: 10px;">
-          Atau tulis semua hal yang bikin kamu marah & sedih di bawah ini. Nggak ada yang baca—setelah itu kita terbangkan biar hilang.
+          Tulis semua unek-unek atau omelan kamu di sini, habis itu kita buang jauh-jauh ke luar angkasa:
         </p>
-        <textarea class="vent-textarea" id="ventInput" placeholder="Tulis apa aja di sini... Aku kesel banget karena..."></textarea>
+        <textarea class="vent-textarea" id="ventInput" placeholder="Aku kesel banget hari ini gara-gara..."></textarea>
         <div class="vent-actions">
-          <span class="vent-feedback" id="ventFeedback">Bebanmu sudah diterbangkan 🌸</span>
+          <span class="vent-feedback" id="ventFeedback">Semua sebelmu udah diterbangkan 🚀🌸</span>
           <button class="btn-primary" id="releaseTextBtn" style="padding: 10px 20px; font-size: 0.9rem;">Terbangkan Keluhan 🍃</button>
         </div>
       </div>
     </section>
 
-    <!-- 2. Kartu Buka Saat Kamu... -->
+    <!-- 3. Kartu Buka Saat Kamu... (Romantis) -->
     <section class="card">
-      <h2 class="section-title">💌 Buka Saat Kamu...</h2>
+      <h2 class="section-title">💌 Surat Rahasia Buat Kamu</h2>
       <p class="section-desc">
-        Pilih satu kartu yang paling pas sama perasaan kamu detik ini.
+        Pilih amplop yang paling sesuai sama hati kamu detik ini:
       </p>
 
       <div class="envelope-grid">
         <button class="envelope-btn" data-letter="marah">
-          <span class="envelope-tag">Kartu 01</span>
+          <span class="envelope-tag">Amplop 01 🔥</span>
           <span class="envelope-title">Lagi marah & pengen meledak</span>
         </button>
         <button class="envelope-btn" data-letter="sedih">
-          <span class="envelope-tag">Kartu 02</span>
+          <span class="envelope-tag">Amplop 02 🌧️</span>
           <span class="envelope-title">Lagi sedih & capek banget</span>
         </button>
         <button class="envelope-btn" data-letter="keselAku">
-          <span class="envelope-tag">Kartu 03</span>
+          <span class="envelope-tag">Amplop 03 🥺</span>
           <span class="envelope-title">Lagi kesel sama aku</span>
         </button>
-        <button class="envelope-btn" data-letter="butuhDitemani">
-          <span class="envelope-tag">Kartu 04</span>
-          <span class="envelope-title">Cuma butuh ditemani diam-diam</span>
+        <button class="envelope-btn" data-letter="kangen">
+          <span class="envelope-tag">Amplop 04 🤍</span>
+          <span class="envelope-title">Cuma butuh dipeluk & ditemenin</span>
         </button>
       </div>
     </section>
 
-    <!-- 3. Kupon Kasih Sayang -->
+    <!-- 4. Kupon Suap Ayang -->
     <section class="card">
-      <h2 class="section-title">🎟️ Kupon Pelipur Lara</h2>
+      <h2 class="section-title">🎟️ Voucher Suap Anti-Ngambek</h2>
       <p class="section-desc">
-        Ketuk kupon mana aja yang kamu mau sekarang. Nanti tinggal kirim ke aku, langsung aku turutin!
+        Pilih suapan yang kamu mau hari ini. Tinggal salin lalu kirim ke chat aku, langsung diproses!
       </p>
 
       <div class="coupon-list" id="couponList">
-        <div class="coupon" data-title="Jajan Makanan / Minuman Favorit">
+        <div class="coupon" data-title="Jajan Enak Bebas Pilih (Boba/Seblak/Es Krim)">
           <div class="coupon-info">
-            <h4>🧋 Jajan Favorit Tanpa Alasan</h4>
-            <p>Boba, kopi, seblak, atau es krim—kamu tinggal sebut.</p>
+            <h4>🧋 Jajan Enak Tanpa Alasan</h4>
+            <p>Boba, kopi, seblak, matcha, atau es krim—kamu tinggal sebut.</p>
           </div>
-          <span class="coupon-badge">Klaim</span>
+          <span class="coupon-badge">Ambil</span>
         </div>
 
-        <div class="coupon" data-title="Didengerin Full Tanpa Dipotong">
+        <div class="coupon" data-title="Sesi Curhat & Ngomel Full Tanpa Dipotong">
           <div class="coupon-info">
-            <h4>🎧 Sesi Curhat Bebas</h4>
-            <p>Aku dengerin semua cerita kamu tanpa menghakimi atau motong.</p>
+            <h4>🎧 Dengerin Kamu Ngomel Full</h4>
+            <p>Aku dengerin 100% tanpa motong, tanpa nyalahin, cuma belain kamu.</p>
           </div>
-          <span class="coupon-badge">Klaim</span>
+          <span class="coupon-badge">Ambil</span>
         </div>
 
-        <div class="coupon" data-title="Peluk Lama & Dielus Kepalanya">
+        <div class="coupon" data-title="Peluk Lama + Elus Kepala Pas Ketemu">
           <div class="coupon-info">
-            <h4>🫂 Peluk Lama Pas Ketemu</h4>
-            <p>Berlaku sampai rasa capek dan kesel kamu berkurang.</p>
+            <h4>🫂 Peluk Erat & Elus Kepala</h4>
+            <p>Berlaku sampai baterai kebahagiaan kamu penuh lagi.</p>
           </div>
-          <span class="coupon-badge">Klaim</span>
+          <span class="coupon-badge">Ambil</span>
         </div>
 
-        <div class="coupon" data-title="Waktu Me-Time Bebas Gangguan">
+        <div class="coupon" data-title="Gratis Waktu Me-Time Tanpa Gangguan">
           <div class="coupon-info">
-            <h4>🌙 Waktu Istirahat Tenang</h4>
-            <p>Kalau kamu butuh sendiri dulu, aku kasih ruang & tetap jagain dari jauh.</p>
+            <h4>🌙 Waktu Tenang Sendirian</h4>
+            <p>Kalau mau istirahat dulu, aku jagain dari jauh sampai kamu siap cerita.</p>
           </div>
-          <span class="coupon-badge">Klaim</span>
+          <span class="coupon-badge">Ambil</span>
         </div>
       </div>
 
       <div class="copy-bar">
-        <button class="btn-ghost" id="copyCouponsBtn">📋 Salin Kupon yang Diklaim untuk Chat Aku</button>
+        <button class="btn-ghost" id="copyCouponsBtn">📋 Salin Voucher untuk Kirim ke Chat Aku</button>
         <span class="copy-status" id="copyStatus"></span>
       </div>
     </section>
 
-    <!-- 4. Pelukan Virtual -->
+    <!-- 5. Tombol Keputusan Akhir (Lucu & Romantis) -->
     <section class="card hug-section">
-      <h2 class="section-title" style="justify-content: center;">🤍 Aku Selalu di Pihak Kamu</h2>
+      <h2 class="section-title" style="justify-content: center;">🤍 Jadi, Udah Agak Baikan?</h2>
       <p class="section-desc">
-        Apa pun masalahnya, kamu nggak sendirian menghadapinya. Kalau udah agak legaan, pencet tombol di bawah ya.
+        Ingat ya, apa pun yang terjadi hari ini, aku selalu ada di tim kamu.
       </p>
-      <button class="hug-btn" id="hugBtn">Kirim Peluk Balik 🫂</button>
+
+      <div class="decision-arena" id="decisionArena">
+        <button class="hug-btn" id="forgiveBtn">Udah Baikan & Peluk 🫂💖</button>
+        <button class="runaway-btn" id="runawayBtn">Masih Marah 😤</button>
+      </div>
+
       <div class="hug-message" id="hugMessage"></div>
     </section>
   </main>
@@ -148,4 +169,13 @@
   <!-- Modal Surat -->
   <div class="modal-overlay" id="letterModal">
     <div class="modal-letter">
-      <h3 id="modalTitle
+      <h3 id="modalTitle">Judul Surat</h3>
+      <p id="modalBody">Isi surat...</p>
+      <span class="handwritten">— Dari orang yang paling sayang sama kamu</span>
+      <button class="btn-primary" id="closeModalBtn" style="width: 100%; margin-top: 18px; padding: 12px;">Simpan di Hati 🤍</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

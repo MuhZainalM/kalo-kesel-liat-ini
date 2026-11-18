@@ -1,15 +1,10 @@
-// --- 1. Musik Kotak Musik Lembut (Web Audio API) ---
+// --- 1. Pemutar Lagu about.mp3 + Efek Suara Gelembung ---
 let audioCtx = null;
 let isPlaying = false;
-let melodyTimer = null;
-let noteIndex = 0;
-
-const lullabyNotes = [
-  523.25, 659.25, 783.99, 659.25,
-  587.33, 698.46, 880.00, 698.46,
-  493.88, 587.33, 783.99, 587.33,
-  523.25, 659.25, 783.99, 1046.50
-];
+const bgMusic = document.getElementById('bgMusic');
+if (bgMusic) {
+  bgMusic.volume = 0.5; // Volume 50% agar lembut
+}
 
 function initAudio() {
   if (!audioCtx) {
@@ -18,26 +13,6 @@ function initAudio() {
   if (audioCtx.state === 'suspended') {
     audioCtx.resume();
   }
-}
-
-function playBellNote(freq) {
-  if (!audioCtx || !isPlaying) return;
-  const now = audioCtx.currentTime;
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-
-  osc.type = 'sine';
-  osc.frequency.setValueAtTime(freq, now);
-
-  gain.gain.setValueAtTime(0.001, now);
-  gain.gain.exponentialRampToValueAtTime(0.065, now + 0.04);
-  gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.45);
-
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-
-  osc.start(now);
-  osc.stop(now + 1.5);
 }
 
 function playPopSound() {
@@ -61,28 +36,23 @@ function playPopSound() {
 }
 
 function toggleMusic(forcePlay = null) {
-  initAudio();
+  if (!bgMusic) return;
   isPlaying = forcePlay !== null ? forcePlay : !isPlaying;
 
   const btn = document.getElementById('musicBtn');
   const label = document.getElementById('musicLabel');
 
   if (isPlaying) {
-    btn.classList.add('playing');
-    label.textContent = 'Musik: Nyala';
-    if (!melodyTimer) {
-      playBellNote(lullabyNotes[noteIndex % lullabyNotes.length]);
-      noteIndex++;
-      melodyTimer = setInterval(() => {
-        playBellNote(lullabyNotes[noteIndex % lullabyNotes.length]);
-        noteIndex++;
-      }, 650);
-    }
+    bgMusic.play().then(() => {
+      btn.classList.add('playing');
+      label.textContent = 'Musik: Nyala';
+    }).catch(() => {
+      isPlaying = false;
+    });
   } else {
+    bgMusic.pause();
     btn.classList.remove('playing');
     label.textContent = 'Musik: Mati';
-    clearInterval(melodyTimer);
-    melodyTimer = null;
   }
 }
 
@@ -148,7 +118,7 @@ document.getElementById('resetBubbles').addEventListener('click', () => {
   buildBubbles();
 });
 
-// --- // --- 4. Vent Box (Terkirim ke Email Kamu + Efek Terbang) ---
+// --- 4. Vent Box (Terkirim ke Email Kamu + Efek Terbang) ---
 const ventInput = document.getElementById('ventInput');
 const releaseTextBtn = document.getElementById('releaseTextBtn');
 const ventFeedback = document.getElementById('ventFeedback');
